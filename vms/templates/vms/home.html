@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create VM</title>
+</head>
+<body>
+    <h1>Create Virtual Machine</h1>
+    <form action="{% url 'create_vm' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Create VM</button>
+    </form>
+</body>
+</html>

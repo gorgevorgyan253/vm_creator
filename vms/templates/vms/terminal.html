@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SSH Terminal</title>
+    <link rel="stylesheet" href="https://unpkg.com/xterm/css/xterm.css">
+    <script src="https://unpkg.com/xterm/lib/xterm.js"></script>
+</head>
+<body>
+    <div id="terminal"></div>
+    <script>
+        var term = new Terminal();
+        term.open(document.getElementById('terminal'));
+        term.write('Connecting...\r\n');
+
+        var socket = new WebSocket('ws://localhost:8000/ws/ssh/');
+        socket.onopen = function() {
+            term.write('Connected.\r\n$ ');
+            term.onData(function(data) {
+                socket.send(JSON.stringify({command: data}));
+            });
+        };
+        socket.onmessage = function(event) {
+            term.write(event.data);
+            term.write('\r\n$ ');
+        };
+    </script>
+</body>
+</html>
+

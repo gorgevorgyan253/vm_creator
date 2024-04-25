@@ -1,0 +1,16 @@
+<html>
+<head>
+    <title>VNC Viewer</title>
+    <script>
+        function refreshImage() {
+            var img = document.getElementById('vnc-image');
+            img.src = '/vnc-image'; // URL to fetch the VNC screen image
+            setTimeout(refreshImage, 1000); // Refresh every second
+        }
+        window.onload = refreshImage;
+    </script>
+</head>
+<body>
+    <img id="vnc-image" src="" alt="VNC Screen">
+</body>
+</html>
